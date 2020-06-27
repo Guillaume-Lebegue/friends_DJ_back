@@ -12,7 +12,6 @@ const PlaylistModel = new Schema({
     videos: [{
         id: {type: String, required: true},
         title: {type: String, required: true},
-        description: {type: String, required: true},
         thumbnails: {type: String, required: true},
         channel: {type: String, required: true},
         duration: {

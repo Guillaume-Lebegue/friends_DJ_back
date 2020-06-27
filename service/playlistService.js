@@ -7,7 +7,6 @@ class PlaylistService {
         const video = {
             id: ytVideo.id,
             title: ytVideo.snippet.title,
-            description: ytVideo.snippet.description,
             thumbnails: ytVideo.snippet.thumbnails.default.url,
             channel: ytVideo.snippet.channelTitle,
             duration: null

@@ -2,8 +2,9 @@ const PlaylistService = require('../service/playlistService');
 
 module.exports = (shortid, socket, username) => {
     return new Promise(async (resolve, reject) => {
+        let playlist;
         try {
-            const playlist = await PlaylistService.findPlaylistByShortId(shortid);
+            playlist = await PlaylistService.findPlaylistByShortId(shortid);
         } catch(err) {
             reject(err);
         }

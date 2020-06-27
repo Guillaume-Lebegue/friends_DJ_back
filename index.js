@@ -21,7 +21,7 @@ Mongoose.connect(process.env.DBURL, {
 const app = Express();
 const port = process.env.port || process.env.PORT || 3000
 const server = app.listen(port);
-const io = require('socket.io')(server);
+const io = require('socket.io').listen(server);
 require('./controllers/socketController')(io);
 
 console.log('[Server] listening on port ', port);
