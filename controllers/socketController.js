@@ -87,6 +87,24 @@ module.exports = (io) => {
             }
         })
 
+        socket.on('nextVideo', async data => {
+            if (typeof data === 'string')
+                data = JSON.parse(data);
+            
+            try {
+                const playlist = await playlistService.findPlaylistBySocket(socket.id);
+                playlist.actualVideo = playlist.actualVideo > parseInt(data.passed, 10)
+                    ? playlist.actualVideo : parseInt(data.passed, 10) + 1;
+                playlist.save((err, doc) => {
+                    if (err)
+                        console.log(err);
+                })
+            } catch (error) {
+                if (error != 'not found')
+                    console.log(error);
+            }
+        })
+
         socket.on('sendMessage', async data => {
             if (typeof data === 'string')
                 data = JSON.parse(data);
