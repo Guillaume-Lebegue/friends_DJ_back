@@ -4,10 +4,14 @@ const url = require('url');
 class YoutubeService {
 
     getVideoIdFromUrl(url) {
-        const urlObject = new URL(url);
-        const searchParams = urlObject.searchParams;
+        try {
+            const urlObject = new URL(url);
+            const searchParams = urlObject.searchParams;
 
-        return searchParams.get('v');
+            return searchParams.get('v');
+        } catch (err) {
+            return null;
+        }
     }
 
     getVideo(videoId) {
