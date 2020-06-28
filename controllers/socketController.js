@@ -77,7 +77,7 @@ module.exports = (io) => {
                         answer({message: 'ko'});
                     } else {
                         answer({message: 'ok'});
-                        io.to(playlist.shortId).emit('newVideo', video);
+                        io.to(playlist.shortId).emit('newVideo', {video, senderId: socket.id});
                     }
                 })
             } catch (error) {
