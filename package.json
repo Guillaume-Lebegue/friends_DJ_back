@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node ./index.js",
+    "prod": "PORT=3333 node ./index.js",
     "watch": "nodemon ./index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
