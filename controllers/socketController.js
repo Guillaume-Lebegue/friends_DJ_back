@@ -51,7 +51,7 @@ module.exports = (io) => {
             }
         })
 
-        socket.on('nextVideo', async (data, answer) => {
+        socket.on('addVideo', async (data, answer) => {
             if (typeof data === 'string')
                 data = JSON.parse(data);
             
@@ -73,7 +73,7 @@ module.exports = (io) => {
                 playlist.videos.push(video);
                 playlist.save((err, doc) => {
                     if (err) {
-                        console.log(error);
+                        console.error(error);
                         answer({message: 'ko'});
                     } else {
                         answer({message: 'ok'});
@@ -81,9 +81,21 @@ module.exports = (io) => {
                     }
                 })
             } catch (error) {
-                console.log(error);
+                console.error(error);
                 answer({message: 'ko'});
                 return;
+            }
+        })
+
+        socket.on('sendMessage', async data => {
+            if (typeof data === 'string')
+                data = JSON.parse(data);
+
+            try {
+                const playlist = await playlistService.findPlaylistBySocket(socket.id);
+                io.to(playlist.shortId).emit('newMessage', {message: data.message, senderId: socket.id});
+            } catch (error) {
+                console.error(error);
             }
         })
     })
